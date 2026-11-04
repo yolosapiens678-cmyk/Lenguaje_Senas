@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traductor LSM Automático - MediaPipe Hands</title>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-core"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-webgl"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/hand-pose-detection"></script>
+    
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <header class="navbar">
+        <h1>🤟 Traductor Automático de Lengua de Señas Mexicana (LSM)</h1>
+        <p>Detección de articulaciones en tiempo real</p>
+    </header>
+
+    <main class="container">
+        <section class="card vision-card">
+            <h2>📹 Cámara Web en Vivo</h2>
+            <div class="video-wrapper">
+                <video id="webcam" autoplay playsinline muted></video>
+                <canvas id="output-canvas"></canvas>
+                <div id="status-badge" class="badge">Iniciando modelo de manos...</div>
+            </div>
+
+            <div class="prediction-box">
+                <div class="pred-item">
+                    <span>Seña Detectada (LSM):</span>
+                    <h3 id="predicted-letter">Esperando mano...</h3>
+                </div>
+            </div>
+        </section>
+
+        <section class="right-column">
+            <div class="card word-card">
+                <h2>✍️ Palabra / Texto Traducido</h2>
+                <div id="word-display" class="word-display">_</div>
+                <div class="word-controls">
+                    <button class="btn btn-secondary" onclick="agregarEspacio()">Espacio ␣</button>
+                    <button class="btn btn-secondary" onclick="borrarUltimaLetra()">Borrar ⌫</button>
+                    <button class="btn btn-danger" onclick="limpiarPalabra()">Limpiar 🗑️</button>
+                    <button class="btn btn-success" onclick="leerTexto()">Escuchar 🔊</button>
+                </div>
+            </div>
+
+            <div class="card info-card">
+                <h2>ℹ️ Cómo usar</h2>
+                <ul>
+                    <li>Pon tu mano frente a la cámara realizando la seña en Lengua de Señas Mexicana (LSM)[cite: 5].</li>
+                    <li>Sostén la seña durante <strong>1 segundo</strong> para que la letra se escriba automáticamente en la pantalla.</li>
+                    <li>Si retiras la mano de la cámara, el sistema volverá al estado <em>"Esperando mano..."</em> sin generar falsas detecciones.</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/scripts.js"></script>
+</body>
+</html>
